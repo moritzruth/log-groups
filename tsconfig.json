@@ -1,0 +1,22 @@
+{
+  "extends": "@sindresorhus/tsconfig",
+  "files": [
+    "src/index.ts"
+  ],
+  "compilerOptions": {
+    "outDir": "./",
+    "noUnusedLocals": false,
+    "target": "es5",
+    "lib": [
+      "es2018"
+    ],
+    "typeRoots": [
+      "./typings",
+      "node_modules/@types"
+    ],
+    "sourceMap": false
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
