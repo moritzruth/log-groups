@@ -9,7 +9,11 @@ $ npm install log-groups
 ```
 
 ## Usage
+
+### Basic
 ```javascript
+// examples/basic.js
+
 const { LogGroup } = require("log-groups");  
   
 // You don’t have to provide any options at all. Default values will apply.  
@@ -33,6 +37,17 @@ mainProcess.log("Log 2");
 process1.log("Process 1 started");  
 mainProcess.log("Main process again");  
 process1.log("Aaaand, it‘s me again.");
+```
+
+### Streaming
+```javascript
+// examples/streaming.js
+
+const { LogGroup } = require("../index");
+
+// Every instance is also a Writable stream!
+mainProcess.write("Woooow, streaming!")
+
 ```
 
 ## Options
