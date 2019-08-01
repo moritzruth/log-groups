@@ -84,7 +84,7 @@ export class LogGroup extends Writable {
   }
 
   public _write(chunk: any, _encoding: string, callback: (error?: (Error | null)) => void): void {
-    this.log(chunk);
+    this.log(chunk.toString("utf-8"));
     callback();
   }
 
