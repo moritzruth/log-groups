@@ -1,6 +1,6 @@
 {
   "name": "log-groups",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Log thematically matching logs grouped in boxes",
   "main": "./index.js",
   "keywords": [
