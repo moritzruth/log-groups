@@ -3,6 +3,15 @@
   "version": "1.0.1",
   "description": "Log thematically matching logs grouped in boxes",
   "main": "./index.js",
+  "keywords": [
+    "console",
+    "log",
+    "cli",
+    "box",
+    "boxes",
+    "output",
+    "grouping"
+  ],
   "types": "./index.d.ts",
   "repository": "https://github.com/moritzruth/log-groups.git",
   "author": "Moritz Ruth <moritzruthcode@gmail.com>",
