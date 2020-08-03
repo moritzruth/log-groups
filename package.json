@@ -25,7 +25,7 @@
     "index.d.ts"
   ],
   "dependencies": {
-    "chalk": "^2.4.2",
+    "chalk": "^4.1.0",
     "cli-boxes": "^2.2.0",
     "figures": "^3.0.0",
     "string-width": "^4.1.0"
