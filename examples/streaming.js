@@ -1,4 +1,4 @@
-const { LogGroup } = require("../index");
+const { LogGroup } = require("..")
 
 // Every instance is also a Writable stream!
-mainProcess.write("Woooow, streaming!")
+LogGroup().write("Woooow, streaming!")

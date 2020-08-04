@@ -1,38 +1,9 @@
 {
-  "files": [
-    "src/index.ts"
-  ],
   "compilerOptions": {
-		"module": "commonjs",
-		"moduleResolution": "node",
-		"esModuleInterop": true,
-		"allowSyntheticDefaultImports": true,
-		"resolveJsonModule": true,
-		"declaration": true,
-		"pretty": true,
-		"newLine": "lf",
-		"stripInternal": true,
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Node",
     "strict": true,
-    "importHelpers": true,
-		"noImplicitReturns": true,
-		"noUnusedParameters": true,
-		"noFallthroughCasesInSwitch": true,
-		"noEmitOnError": true,
-		"forceConsistentCasingInFileNames": true,
-		"skipLibCheck": true,
-    "outDir": "./",
-    "noUnusedLocals": false,
-    "target": "es5",
-    "lib": [
-      "es2018"
-    ],
-    "typeRoots": [
-      "./typings",
-      "node_modules/@types"
-    ],
-    "sourceMap": false
-  },
-  "exclude": [
-    "node_modules"
-  ]
+    "esModuleInterop": true
+  }
 }

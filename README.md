@@ -2,52 +2,46 @@
 > Log messages ... in groups
 
 ## Install
-```bash
-$ yarn add log-groups
+```shell script
+yarn add log-groups
 # or
-$ npm install log-groups
+npm install log-groups
 ```
 
 ## Usage
-
 ### Basic
-```javascript
-// examples/basic.js
+```js
+const { LogGroup } = require("log-groups")
 
-const { LogGroup } = require("log-groups");  
-  
-// You don’t have to provide any options at all. Default values will apply.  
-const mainProcess = new LogGroup();  
-const process1 = new LogGroup({  
-  // All available options:  
-  title: "Process 1",  
-  color: "green",  
-  padding: 0,  
-  box: "double",  
-  fallbackWidth: 20,  
-  maxWidth: 40  
-});  
-  
-// No new block will be created, instead,  
-// the second message will be appended to the last block.  
-mainProcess.log("Log 1");  
-mainProcess.log("Log 2");  
-  
-// A new block will be created.  
-process1.log("Process 1 started");  
-mainProcess.log("Main process again");  
-process1.log("Aaaand, it‘s me again.");
+// You don’t have to provide any options at all. Default values will apply.
+const mainProcess = new LogGroup()
+const process1 = new LogGroup({
+  // All available options:
+  title: "Process 1",
+  color: "green",
+  padding: 0,
+  box: "classic",
+  fallbackWidth: 20,
+  maxWidth: 50
+})
+
+// No new block will be created, instead,
+// the second message will be appended to the last block.
+mainProcess.log("Log 1")
+mainProcess.log("Log 2")
+
+// A new block will be created.
+process1.log("Process 1 started")
+mainProcess.log("Main process again")
+process1.log("Aaaand, it‘s me again.")
 ```
 
 ### Streaming
-```javascript
-// examples/streaming.js
-
-const { LogGroup } = require("../index");
+```js
+const { LogGroup } = require("log-groups")
 
 // Every instance is also a Writable stream!
-mainProcess.write("Woooow, streaming!")
-
+LogGroup().write("Woooow, streaming!")
 ```
 
 ## Options
