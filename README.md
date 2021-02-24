@@ -2,7 +2,10 @@
 > Log messages ... in groups
 
 ## Install
-```shell script
+Minimum required Node.js version is `v14.0.0`.
+
+![npm](https://img.shields.io/npm/v/log-groups?style=flat-square)
+```sh
 yarn add log-groups
 # or
 npm install log-groups
@@ -45,25 +48,28 @@ LogGroup().write("Woooow, streaming!")
 ```
 
 ## Options
-- `title` - *string*
-	> Self-explanatory
-   > 
-   > Default: `""`
-- `color` - One of *"red"*, *"green"*, *"yellow"*, *"blue"*, *"magenta"*, *"cyan"*, *"dim"*, *"white"*, *"black"* and *"gray"*
-	> The color of the border and the title
-   > 
-   > Default: `"dim"`
-- `box` - One of *"single"*, *"double"*, *"round"*, *"bold"*, *"singleDouble"*, *"doubleSingle"* and *"classic"* **or** your own style (an object compatible to [this boxes](https://github.com/sindresorhus/cli-boxes/blob/master/boxes.json))
+- title `string`
+  > The title of the group.
+  >
+  > Default `""`
+- color [`typeof chalk.ForegroundColor`](https://github.com/chalk/chalk#colors)
+  > The color of the border and the title.
+  >
+  > Default `"blueBright"`
+- box
   > The style of the box.
-   > 
-   > Default: `"round"`
-- `padding` - *{ top: number, right: number, bottom: number, left: number }* **or** *{ topAndBottom: number, leftAndRight: number }* **or** *number*
+  > Can be any key from [this object](https://github.com/sindresorhus/cli-boxes/blob/ee5acd66ae7e676ac716a2f49884fbb5dc315e8d/boxes.json) or a custom object.
+  >
+  > Default `"round"`
+- padding `{ top: number, right: number, bottom: number, left: number } | { topAndBottom: number, leftAndRight: number } | number`
   > The padding inside the box.
-   > 
-   > Default: `1`
- - `fallbackWidth` - *number*
-   > The box width which will be used if process.stdout.columns is null.
-   > 
-   > Default: `1000`
-
-BTW, it automatically breaks lines (wow) and indicates following lines with a small arrow `›`.
+  >
+  > Default: `1`
+- fallbackWidth `number`
+  > The box width which will be used if process.stdout.columns is null.
+  >
+  > Default: `50`
+- maxWidth `number`
+  > The maximum width of the box.
+  >
+  > Default: `1000`

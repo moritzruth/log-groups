@@ -1,2 +1,6 @@
 node_modules/
-pkg/
+dist/
+.idea/
+
+package-lock.json
+yarn.lock

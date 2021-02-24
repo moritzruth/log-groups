@@ -1,4 +1,4 @@
-const { LogGroup } = require("../pkg")
+const { LogGroup } = require("..")
 
 // You don’t have to provide any options at all. Default values will apply.
 const mainProcess = new LogGroup()

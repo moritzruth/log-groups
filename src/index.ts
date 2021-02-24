@@ -10,7 +10,7 @@ const lastLog: {
   width: number
 } | null = null
 
-function breakStringEvery(string: string, n: number) {
+function breakStringEveryN(string: string, n: number) {
   return string.match(new RegExp(`.{1,${n}}`, "gu")) ?? []
 }
 
@@ -36,7 +36,7 @@ export type PaddingCompatible = Padding | number | {
 
 export interface LogGroupOptions {
   title: string
-  color: string
+  color: typeof chalk.ForegroundColor
   box: BoxStyle | keyof Boxes
   padding: PaddingCompatible
   fallbackWidth: number
@@ -46,7 +46,7 @@ export interface LogGroupOptions {
 export class LogGroup extends Writable {
   readonly options: LogGroupOptions = {
     title: "",
-    color: "dim",
+    color: "blueBright",
     box: cliBoxes.round,
     padding: 1,
     fallbackWidth: 50,
@@ -62,7 +62,7 @@ export class LogGroup extends Writable {
     Object.assign(this.options, options)
 
     if (Object.values(this.normalizedPadding).some(v => v < 0))
-      throw new Error("Padding must not be negative")
+      throw new Error("padding must not be negative")
   }
 
   log(...parts: string[]): void {
@@ -115,7 +115,7 @@ export class LogGroup extends Writable {
   }
 
   private writeLog(data: string | object): void {
-    const width = lastLog?.width ?? this.blockWidth
+    const width = (lastLog?.width ?? this.blockWidth) - 1
 
     const lines = (typeof data === "string" ? data : util.inspect(data)).split("\n")
 
@@ -127,31 +127,31 @@ export class LogGroup extends Writable {
         continue
       }
 
-      const parts = breakStringEvery(line, partWidth)
+      const parts = breakStringEveryN(line, partWidth)
 
-      let i = 0
+      let index = 0
       for (const part of parts) {
         print(
-          this.applyColor(this.box.vertical),
+          this.applyColor(this.box.left),
           " ".repeat(this.normalizedPadding.left),
-          i === 0 ? "  " : `${chalk.dim(figures.pointerSmall)} `,
+          index === 0 ? "  " : `${chalk.dim(figures.pointerSmall)} `,
           part,
           " ".repeat(width - stringWidth(part) - this.normalizedPadding.left - 4),
-          this.applyColor(this.box.vertical),
+          this.applyColor(this.box.right),
           "\n"
         )
 
-        i++
+        index++
       }
     }
   }
 
   private writeEmptyLogLines(count = 1): void {
-    for (let i = 0; i < count; i++) {
+    for (let index = 0; index < count; index++) {
       print(
-        this.applyColor(this.box.vertical),
-        " ".repeat((lastLog?.width ?? this.blockWidth) - 2),
-        this.applyColor(this.box.vertical),
+        this.applyColor(this.box.left),
+        " ".repeat((lastLog?.width ?? this.blockWidth) - 3),
+        this.applyColor(this.box.right),
         "\n"
       )
     }
@@ -163,21 +163,21 @@ export class LogGroup extends Writable {
       lastLog.title = this.options.title
     }
 
-    const width = lastLog?.width ?? this.blockWidth
+    const width = (lastLog?.width ?? this.blockWidth) - 1
 
-    if (this.options.title && this.options.title.length !== 0) {
+    if (this.options.title && this.options.title.length > 0) {
       print(this.applyColor(
         this.box.topLeft,
-        this.box.horizontal.repeat(Math.floor((width / 2) - (this.options.title.length / 2)) - 2),
+        this.box.top.repeat(Math.floor((width / 2) - (this.options.title.length / 2)) - 2),
         this.applyColor(` ${this.options.title} `),
-        this.box.horizontal.repeat(Math.ceil((width / 2) - (this.options.title.length / 2)) - 2),
+        this.box.top.repeat(Math.ceil((width / 2) - (this.options.title.length / 2)) - 2),
         this.box.topRight,
         "\n"
       ))
     } else {
       process.stdout.write(this.applyColor(
         this.box.topLeft,
-        this.box.horizontal.repeat(width - 2),
+        this.box.top.repeat(width - 2),
         this.box.topRight,
         "\n"
       ))
@@ -187,19 +187,17 @@ export class LogGroup extends Writable {
   }
 
   private writeLogBlockEnd(): void {
-    const width = lastLog?.width ?? this.blockWidth
+    const width = (lastLog?.width ?? this.blockWidth) - 1
 
     process.stdout.write(this.applyColor(
       this.box.bottomLeft,
-      this.box.horizontal.repeat(width - 2),
+      this.box.bottom.repeat(width - 2),
       this.box.bottomRight,
       "\n"
     ))
   }
 
   private applyColor(...strings: string[]): string {
-    // @ts-expect-error
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-return
     return chalk[this.options.color](strings.join(""))
   }
 }
