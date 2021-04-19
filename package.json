@@ -38,6 +38,6 @@
     "chalk": "^4.1.0",
     "cli-boxes": "^3.0.0",
     "figures": "^3.2.0",
-    "string-width": "^4.2.0"
+    "string-width": "^5.0.0"
   }
 }
